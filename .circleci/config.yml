@@ -17,6 +17,8 @@ jobs:
       - image: "circleci/python:3.6.4"
     steps:
       - checkout
+      - run: |
+          curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install-latest.sh | bash
       - run:
           command: FOSSA_API_KEY=874c225a14ce5a2bebe8840ea37d02b5 fossa test
 workflows:
