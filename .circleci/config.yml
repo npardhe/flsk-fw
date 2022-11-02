@@ -18,7 +18,7 @@ jobs:
     steps:
       - checkout
       - run:
-          command: fossa test
+          command: FOSSA_API_KEY=874c225a14ce5a2bebe8840ea37d02b5 fossa test
 workflows:
   version: 2
   build_and_test:
