@@ -1,0 +1,28 @@
+version: 2
+
+jobs:
+  build:
+    working_directory: ~/demo-cicleCI
+    docker:
+      - image: "circleci/python:3.6.4"
+    steps:
+      - run: |
+          curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install-latest.sh | bash
+      - checkout
+      - run: python3 main.py
+      - run:
+          command: fossa analyze
+  test:
+    working_directory: ~/demo-cicleCI
+    docker:
+      - image: "circleci/python:3.6.4"
+    steps:
+      - checkout
+      - run:
+          command: fossa test
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
